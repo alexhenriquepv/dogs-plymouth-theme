@@ -1,0 +1,32 @@
+
+Window.SetBackgroundTopColor (0.0, 0.00, 0.0);
+Window.SetBackgroundBottomColor (0.0, 0.00, 0.0);
+
+# quantidade de frames do gif
+img_count = 49;
+
+# tempo de execução do gif
+total_time = 5;
+
+# Organiza os frames
+for (i = 0; i < img_count; i++)
+{
+    dogs_img[i] = Image("img/progress-" + i + ".png");
+}
+
+dogs_sprite = Sprite();
+
+# Posiciona o sprite no cetro da tela
+dogs_sprite.SetX(Window.GetWidth() / 2 - dogs_img[1].GetWidth() / 2); 
+dogs_sprite.SetY(Window.GetHeight() / 2 - dogs_img[1].GetHeight() / 2);
+
+progress = 0;
+
+# Essa função é chamada 50 vezes por segundo
+fun refresh_callback ()
+{
+    dogs_sprite.SetImage(dogs_img[Math.Int(progress / total_time) % img_count]);
+    progress++;
+}
+  
+Plymouth.SetRefreshFunction (refresh_callback);
